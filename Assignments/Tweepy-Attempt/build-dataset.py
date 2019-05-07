@@ -5,6 +5,7 @@ import tweepy
 import env #Custom env file for tweepy keys
 import dataset
 import json
+import csv
 import os
 
 
@@ -121,5 +122,23 @@ print(len(db['tweets']))
 all_tweets = db['tweets'].all()
 print(all_tweets)
 
-for tweet in db['tweets']:
-   print(tweet["text"])
+# ['tweets']
+# ['id', 'user_description', 'user_location', 'coordinates', 'text', 'user_name', 'user_created', 'user_followers', 'id
+# _str', 'created', 'retweet_count', 'user_bg_color', 'polarity', 'subjectivity']
+# 3181
+# <dataset.util.ResultIter object at 0x11cd3e0b8>
+
+#TODO:
+# Iterate over the database and read tweet to csv
+# The new csv file should overrite the old one
+# I should use the csv module to format as iterating
+
+
+# with open('formatted_tweets.csv', 'wb') as file:
+#     for tweet in db['tweets']:
+#         print(tweet["text"])
+#
+#
+#     writer = csv.writer(f)
+#     writer.writerow(['Column 1', 'Column 2', ...])
+#     writer.writerows(data)
