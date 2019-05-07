@@ -122,9 +122,11 @@ print(len(db['tweets']))
 all_tweets = db['tweets'].all()
 print(all_tweets)
 
+for tweet in all_tweets:
+    print(tweet)
+
 # ['tweets']
-# ['id', 'user_description', 'user_location', 'coordinates', 'text', 'user_name', 'user_created', 'user_followers', 'id
-# _str', 'created', 'retweet_count', 'user_bg_color', 'polarity', 'subjectivity']
+# ['id', 'user_description', 'user_location', 'coordinates', 'text', 'user_name', 'user_created', 'user_followers', 'id_str', 'created', 'retweet_count', 'user_bg_color', 'polarity', 'subjectivity']
 # 3181
 # <dataset.util.ResultIter object at 0x11cd3e0b8>
 
@@ -134,11 +136,8 @@ print(all_tweets)
 # I should use the csv module to format as iterating
 
 
-# with open('formatted_tweets.csv', 'wb') as file:
-#     for tweet in db['tweets']:
-#         print(tweet["text"])
-#
-#
-#     writer = csv.writer(f)
-#     writer.writerow(['Column 1', 'Column 2', ...])
-#     writer.writerows(data)
+# with open('formatted_tweets.csv', 'w') as file:
+#     writer = csv.writer(file)
+#     writer.writerow(['id', 'user_description', 'user_location', 'coordinates', 'text', 'user_name', 'user_created', 'user_followers', 'id_str', 'created', 'retweet_count', 'user_bg_color', 'polarity', 'subjectivity'])
+#     for tweet in all_tweets:
+#         writer.writerows(tweet)
