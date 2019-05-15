@@ -7,6 +7,8 @@ import dataset
 import json
 import csv
 import os
+import pymysql
+import pandas
 
 
 '''
@@ -14,8 +16,7 @@ Open a persistent connection to the Twitter API.
 Process each tweet that we receive.
 Store the processed tweets.
 
-we’ll need to use a programming paradigm called event-driven programming
-
+We’ll need to use a programming paradigm called event-driven programming
 '''
 
 
@@ -53,7 +54,7 @@ class StreamListener(tweepy.StreamListener):
         id_str = status.id_str
         created = status.created_at
         retweets = status.retweet_count
-        bg_color = status.user.profile_background_color
+
 
         #TODO: We could preprocess the tweets here by feeding each tweet as we stream them through our ML model
         # and then we can store the sentiment score along with these other features
@@ -105,7 +106,6 @@ class StreamListener(tweepy.StreamListener):
             return False
 
 
-
 auth = tweepy.OAuthHandler(env.TWITTER_APP_KEY, env.TWITTER_APP_SECRET)
 auth.set_access_token(env.TWITTER_KEY, env.TWITTER_SECRET)
 api = tweepy.API(auth)
@@ -124,6 +124,29 @@ print(all_tweets)
 
 for tweet in all_tweets:
     print(tweet)
+
+
+
+
+    # print("user_description:", tweet)
+
+# cursor = conn.cursor()
+# query = 'select * from your_table_name'
+#
+# with open("output.csv","w") as outfile:
+#     writer = csv.writer(outfile, quoting=csv.QUOTE_NONNUMERIC)
+#     writer.writerow(col[0] for col in cursor.description)
+#     for row in cursor:
+#         writer.writerow(row)
+
+# OrderedDict([('id', 3180), ('user_description', 'Mom of 3 Mixed Princesses 👑\nCountry Over Party 🇺🇲\n#AntiWar is #
+# ProLife ♥\nReject Socialism & Communism ✌️\n#NeverHillary #BiTwitter\n#Pete2020 🌈 #Tulsi2020 🌺'), ('user_location'
+# , 'Indiana 🇺🇲'), ('coordinates', None), ('text', "No it's definitely not time to move on!\nJoe Biden is a racist an
+# d a pervert!\nHe is Hillary Clinton with a penis.… https://t.co/vOG7o22Ii1"), ('user_name', 'anhndrx'), ('user_create
+# d', datetime.datetime(2019, 4, 22, 5, 31, 16)), ('user_followers', 101), ('id_str', '1125824701983592448'), ('created
+# ', datetime.datetime(2019, 5, 7, 18, 8, 20)), ('retweet_count', 0), ('user_bg_color', 'F5F8FA'), ('polarity', None),
+# ('subjectivity', None)])
+
 
 # ['tweets']
 # ['id', 'user_description', 'user_location', 'coordinates', 'text', 'user_name', 'user_created', 'user_followers', 'id_str', 'created', 'retweet_count', 'user_bg_color', 'polarity', 'subjectivity']
